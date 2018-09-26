@@ -1,4 +1,4 @@
-# Améliorer le visuel des pull request Github
+# Améliorer le visuel des pull requests Github
 
 Met en évidence le status de la pull request.
 
