@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Better Github
-// @version      0.1
+// @version      0.2
 // @description  highlight Github pull request status
 // @updateURL    https://github.com/Cerzat43/userscript-github/blob/master/better-github.js
 // @downloadURL  https://github.com/Cerzat43/userscript-github/blob/master/better-github.js
@@ -9,6 +9,12 @@
 // ==/UserScript==
 
 const ALREADY_REPLACED_CLASS = '__PR_REPLACED__';
+
+const arr = {
+  'Changes requested': '#fce8e6',
+  'Review required': '#ffffaa',
+  'Approved': '#ccff99'
+};
 
 const replaceDivBackground = function() {
   const pullRequestSelector = '.js-issue-row';
@@ -21,17 +27,7 @@ const replaceDivBackground = function() {
     const stateElementText = stateElement ? stateElement.textContent.trim() : null;
 
     pullRequest.classList.add(ALREADY_REPLACED_CLASS);
-    switch (stateElementText) {
-      case 'Changes requested':
-        pullRequest.style.backgroundColor = '#fce8e6';
-        break;
-      case 'Review required':
-        pullRequest.style.backgroundColor = '#ffffaa';
-        break;
-      case 'Approved':
-        pullRequest.style.backgroundColor = '#ccff99';
-        break;
-    }
+    pullRequest.style.backgroundColor = arr[stateElementText];
   });
 };
 
@@ -41,3 +37,5 @@ observer.observe(document.querySelector(`${pullRequestSelector}`), {
   subtree: true,
   childList: true
 });
+
+// / <b class="text-red">✗ Non validé</b>
